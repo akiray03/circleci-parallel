@@ -36,6 +36,10 @@ module CircleCI
         Kernel.puts(*args) unless configuration.silent
       end
 
+      def print(*args)
+        Kernel.print(*args) unless configuration.silent
+      end
+
       def clean
         FileUtils.rmtree(WORK_DIR) if Dir.exist?(WORK_DIR)
       end

@@ -114,6 +114,11 @@ module CircleCI
     # @!scope class
     def_delegator :environment, :puts
 
+    # @api private
+    # @!method print
+    # @!scope class
+    def_delegator :environment, :print
+
     class << self
       # Returns the local data directory where node specific data should be saved in.
       #

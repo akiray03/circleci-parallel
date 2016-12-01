@@ -17,9 +17,11 @@ module CircleCI
         private
 
         def wait_for_master_node_to_download
-          # TODO: Consider implementing timeout mechanism
           Parallel.puts('Waiting for master node to download data...')
-          Kernel.sleep(1) until downloaded?
+          until downloaded?
+            Kernel.sleep(1)
+            Parallel.print('.')
+          end
         end
 
         def downloaded?

@@ -18,12 +18,12 @@ module CircleCI
         private
 
         def download_from_slave_nodes
-          # TODO: Consider implementing timeout mechanism
           Parallel.puts('Waiting for slave nodes to be ready for download...')
           loop do
             downloaders.each(&:download)
             break if downloaders.all?(&:downloaded?)
             Kernel.sleep(1)
+            Parallel.print('.')
           end
         end
 
@@ -39,7 +39,7 @@ module CircleCI
           def download
             return if downloaded?
             return unless ready_for_download?
-            Parallel.puts("Downloading data from #{node.ssh_host}...")
+            Parallel.puts("\nDownloading data from #{node.ssh_host}...")
             @downloaded = scp
             mark_as_downloaded if downloaded?
           end
